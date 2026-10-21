@@ -1,0 +1,12 @@
+/* V4 — arquitetura e galeria acessível */
+.architecture-section{background:radial-gradient(ellipse at 70% 30%,#20192f 0%,#0c0c14 60%)}
+.architecture-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:38px 0}
+.architecture-node{position:relative;display:flex;min-height:170px;flex-direction:column;gap:13px;padding:24px 20px;background:linear-gradient(145deg,#252033,#151420);border:1px solid #ffffff24;border-radius:12px}
+.architecture-node:not(:last-child):after{content:'→';position:absolute;z-index:1;top:45%;right:-18px;font-size:24px;color:#c2a4ff}
+.architecture-order{font-size:11px;color:#b8a4e9;letter-spacing:2px}.architecture-node strong{font-size:19px;color:white}.architecture-node>span:last-child{font-size:13px;line-height:1.5;color:#aaa7b8}
+.engineering-list{margin-top:30px}.engineering-list h3{font-size:20px;margin-bottom:18px}.engineering-list p{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:#c7c3d3}.engineering-list svg{flex-shrink:0;color:#bb9cec;margin-top:3px}
+.gallery-open{display:grid;place-items:center;border:1px solid #ffffff45;background:#ffffff0c;color:white;width:47px;height:47px;border-radius:50%;transition:background .2s}.gallery-open:hover{background:#8a73cc}
+.gallery-thumbs button:focus-visible,.gallery-arrows button:focus-visible,.gallery-open:focus-visible{outline:3px solid #c7aaff;outline-offset:3px}
+@media(max-width:850px){.architecture-flow{grid-template-columns:1fr}.architecture-node{min-height:120px}.architecture-node:not(:last-child):after{content:'↓';top:auto;bottom:-21px;right:50%}}
+@media(max-width:760px){.gallery-open{width:40px;height:40px}}
+@media(prefers-reduced-motion:reduce){.gallery-open{transition:none}}

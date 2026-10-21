@@ -1,0 +1,22 @@
+/* V12 — animação editorial controlada pela rolagem, sem alterar o fluxo da página */
+.motion-heading{--motion-progress:0;--motion-distance:0px;--motion-visibility:1;overflow:visible}
+.motion-heading .motion-line{display:block;overflow:clip;padding:.09em .035em .12em;margin:-.09em -.035em -.12em}
+.motion-enabled .motion-heading .motion-line-inner{display:block;transform:translate3d(0,calc((1 - var(--motion-progress))*105%),0);opacity:var(--motion-visibility);will-change:transform,opacity}
+.motion-heading em{font-style:inherit}
+.motion-float{--motion-progress:0;--motion-parallax:0px;--motion-tilt:0deg;transform:translate3d(0,var(--motion-parallax),0) perspective(1300px) rotateX(var(--motion-tilt));will-change:transform}
+.motion-panel{position:relative;isolation:isolate;--motion-wipe:0;--motion-progress:0}
+.motion-panel:after{content:'';position:absolute;inset:0;z-index:7;background:#080a10;transform:scaleY(calc(1 - var(--motion-wipe)));transform-origin:bottom;pointer-events:none;opacity:.92}
+.motion-panel.motion-ready:after{transition:transform .9s cubic-bezier(.19,1,.22,1)}
+.motion-panel.motion-in:after{transform:scaleY(0)}
+.cinematic-projects-grid .project-card{transition:border-color .4s,box-shadow .4s,background .4s}
+.cinematic-projects-grid .project-card .project-art img{transition:filter .6s,scale 1s cubic-bezier(.19,1,.22,1)}
+.cinematic-projects-grid .project-card:hover .project-art img{scale:1.045}
+.motion-magnetic{--mx:0px;--my:0px;translate:var(--mx) var(--my);transition:translate .32s cubic-bezier(.2,.8,.2,1)}
+.motion-magnetic svg{transition:transform .45s cubic-bezier(.19,1,.22,1)}
+.motion-magnetic:hover svg{transform:translate(3px,-2px)}
+/* Linha iluminada acompanha a entrada das seções sem grandes efeitos de blur. */
+.motion-divider{height:1px;display:block;width:100%;transform-origin:left;transform:scaleX(var(--motion-progress,0));background:linear-gradient(90deg,#c8c3dc,#55586b 60%,transparent);opacity:.7}
+@media(max-width:900px){.motion-float{transform:translate3d(0,calc(var(--motion-parallax) * .35),0)}.motion-enabled .motion-heading .motion-line-inner{will-change:auto}}
+@media(prefers-reduced-motion:reduce){.motion-heading .motion-line-inner,.motion-float,.motion-magnetic{transform:none!important;translate:none!important;opacity:1!important}.motion-panel:after{display:none!important}}
+
+.motion-heading .motion-line-inner{display:block}

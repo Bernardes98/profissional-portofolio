@@ -1,0 +1,77 @@
+/* V7 — storytelling progressivo e profundidade controlada por scroll */
+.scroll-cinema{height:330svh;position:relative;background:#05070b;isolation:isolate}
+.scroll-cinema-sticky{position:sticky;top:0;height:100svh;min-height:600px;display:flex;align-items:center;overflow:hidden;background:radial-gradient(ellipse at 72% 46%,#242638 0%,#10131c 34%,#05070b 76%)}
+.scroll-cinema-backdrop{position:absolute;inset:0;opacity:.35;pointer-events:none;background-image:linear-gradient(#ffffff09 1px,transparent 1px),linear-gradient(90deg,#ffffff09 1px,transparent 1px);background-size:100px 100px;mask-image:linear-gradient(90deg,transparent,#000 30%,#000 90%,transparent)}
+.scroll-cinema-sticky:after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 65% 40%,transparent 10%,#0009 98%)}
+.scroll-cinema-inner{position:relative;z-index:2;display:grid;grid-template-columns:43% 57%;align-items:center;gap:2.5%;height:100%;padding-top:75px;padding-bottom:60px}
+.scroll-cinema-copy{max-width:470px}
+.scroll-cinema-overline{font:400 13px/1.7 'DM Sans',sans-serif;color:#b5b9c7;margin:38px 0 12px}
+.scroll-cinema-copy h2{font:600 clamp(45px,5.3vw,76px)/.98 'Space Grotesk',sans-serif;letter-spacing:-.075em;margin:0 0 48px}
+.scroll-cinema-copy h2 em{font-style:normal;color:#c6bbf1}
+.scroll-cinema-steps{position:relative;min-height:170px}
+.scroll-cinema-step{position:absolute;left:0;top:0;width:100%;opacity:0;transform:translateY(30px);filter:blur(8px);transition:opacity .65s ease,transform .75s cubic-bezier(.2,.8,.2,1),filter .65s ease;pointer-events:none}
+.scroll-cinema-step.is-active{opacity:1;transform:translateY(0);filter:blur(0);pointer-events:auto}
+.scroll-cinema-step>span{display:block;font-size:10px;letter-spacing:2px;color:#b3add2;margin-bottom:13px}
+.scroll-cinema-step strong{display:block;color:#f0eff8;font-size:clamp(20px,2.2vw,28px);letter-spacing:-.05em}
+.scroll-cinema-step p{max-width:350px;color:#a8a9b6;font-size:14px;line-height:1.75}
+.scroll-cinema-indicator{display:flex;align-items:center;gap:15px;margin-top:25px;font-size:9px;letter-spacing:1.5px;color:#989bac}
+.scroll-cinema-track{position:relative;width:3px;height:80px;background:#ffffff1c;overflow:hidden}
+.scroll-cinema-progress-fill{display:block;width:100%;height:100%;transform:scaleY(0);transform-origin:top;background:linear-gradient(#fff,#aaa0f0)}
+.scroll-cinema-visual{height:min(56vw,560px);max-height:65vh;min-height:280px;position:relative;display:grid;place-items:center;perspective:1200px}
+.scroll-cinema-light{position:absolute;width:80%;height:65%;border-radius:50%;background:#7b7ed025;filter:blur(80px);transform:scale(calc(.85 + var(--story-progress,0)*.30));pointer-events:none}
+.scroll-cinema-scene{position:absolute;inset:8% 2% 12% 4%;display:flex;flex-direction:column;align-items:stretch;justify-content:center;padding:12px;background:linear-gradient(145deg,#222632,#0a0d13);border:1px solid #ffffff29;box-shadow:0 60px 110px #0009,0 0 0 1px #ffffff09 inset;opacity:0;filter:blur(18px);transform:translate3d(0,65px,-110px) rotateX(9deg) rotateY(-7deg) scale(.89);transition:opacity .9s ease,filter 1s ease,transform 1.15s cubic-bezier(.18,.74,.25,1);pointer-events:none}
+.scroll-cinema-scene.is-active{opacity:1;filter:blur(0);transform:translate3d(0,0,0) rotateX(0) rotateY(-3deg) scale(1);z-index:2}
+.scroll-cinema-scene img{display:block;width:100%;height:calc(100% - 30px);object-fit:contain;object-position:center;background:#10121a}
+.scroll-cinema-scene>span{display:block;padding:11px 6px 2px;color:#c7c6d2;letter-spacing:1.8px;font-size:9px}
+.scroll-cinema-frame-label{position:absolute;right:15px;bottom:0;font-size:9px;color:#858998;letter-spacing:2px}
+.scroll-cinema-side-number{position:absolute;right:26px;top:50%;font-size:9px;letter-spacing:3px;color:#7c8090;writing-mode:vertical-rl;z-index:3}
+/* Framing e imagens realmente reagem ao scroll em vez de só aparecerem. */
+.hero-scene[data-scroll-depth]{translate:0 var(--scroll-shift,0px);transition:translate .13s linear}
+.identity-card[data-scroll-depth]{translate:0 var(--scroll-shift,0px);transition:translate .13s linear}
+.project-real-shot[data-scroll-depth] img{translate:0 var(--scroll-shift,0px);transition:translate .13s linear,transform .7s cubic-bezier(.2,.8,.2,1)}
+.cinematic-projects-grid .project-card:nth-child(even){margin-top:65px}
+.cinematic-projects-grid .project-card:nth-child(3){margin-top:0}
+@media(max-width:900px){
+ .scroll-cinema{height:300svh}
+ .scroll-cinema-inner{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:0;padding-top:90px;padding-bottom:24px}
+ .scroll-cinema-copy{max-width:none}
+ .scroll-cinema-copy h2{margin:12px 0 20px}
+ .scroll-cinema-overline{display:none}
+ .scroll-cinema-steps{min-height:110px}
+ .scroll-cinema-step p{margin:8px 0}
+ .scroll-cinema-indicator{display:none}
+ .scroll-cinema-visual{height:100%;max-height:52svh;min-height:220px}
+ .scroll-cinema-scene{inset:5% 2% 12% 2%}
+ .scroll-cinema-side-number{display:none}
+ .cinematic-projects-grid .project-card:nth-child(even){margin-top:0}
+}
+@media(max-width:600px){
+ .scroll-cinema-sticky{min-height:0}
+ .scroll-cinema-inner{padding-top:92px}
+ .scroll-cinema-copy h2{font-size:clamp(37px,10vw,54px)}
+ .scroll-cinema-copy .section-label{font-size:9px}
+ .scroll-cinema-steps{min-height:120px}
+ .scroll-cinema-step strong{font-size:21px}
+ .scroll-cinema-step p{font-size:12px}
+ .scroll-cinema-visual{max-height:46svh;min-height:180px}
+ .scroll-cinema-scene{padding:6px;inset:5% 0 12% 0}
+ .scroll-cinema-scene>span{font-size:7px}
+ .scroll-cinema-frame-label{font-size:7px;right:0}
+}
+@media(prefers-reduced-motion:reduce){
+ .scroll-cinema{height:auto;min-height:0}
+ .scroll-cinema-sticky{height:auto;min-height:0;position:relative;padding:70px 0}
+ .scroll-cinema-inner{display:block;padding:0}
+ .scroll-cinema-steps{min-height:0;display:grid;gap:16px}
+ .scroll-cinema-step{position:static;opacity:1;transform:none;filter:none;pointer-events:auto;border-top:1px solid #ffffff20;padding-top:16px}
+ .scroll-cinema-visual,.scroll-cinema-indicator{display:none}
+ .hero-scene[data-scroll-depth],.identity-card[data-scroll-depth],.project-real-shot[data-scroll-depth] img{translate:none}
+}
+
+/* V7.1: sticky precisa que seus ancestrais não capturem a rolagem.
+   overflow:clip mantém o recorte horizontal sem criar scroll container. */
+.site-shell{overflow:clip}
+.route-canvas{overflow:visible}
+.scroll-cinema{height:260svh}
+@media(max-width:900px){.scroll-cinema{height:250svh}}
+@media(prefers-reduced-motion:reduce){.scroll-cinema{height:auto}}

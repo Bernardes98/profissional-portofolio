@@ -1,0 +1,69 @@
+/* V16 / Mechanical Cinema — 3D scroll scene with controlled GPU cost */
+.site-shell{overflow:clip!important}
+.robot-v16{position:relative;height:290svh;--iris-progress:0;--iris-open:0;--iris-reveal:0;background:#02050a}
+.robot-v16-sticky{height:100svh;position:sticky;top:0;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 40%,#112238 0%,#050912 50%,#020409 95%)}
+.robot-v16-stage{position:absolute;inset:-6% 0 -6%;transform:translate3d(0,0,0);opacity:calc(1 - var(--iris-reveal) * .72);pointer-events:none}
+.robot-eye-webgl{width:100%;height:100%;display:block}
+.robot-v16-grid,.robot-v16-noise,.robot-v16-shade{position:absolute;inset:0;pointer-events:none}
+.robot-v16-grid{z-index:1;background-image:linear-gradient(#9cbfff0b 1px,transparent 1px),linear-gradient(90deg,#9cbfff0b 1px,transparent 1px);background-size:82px 82px;mask-image:radial-gradient(ellipse at 50% 45%,#000,transparent 76%)}
+.robot-v16-noise{z-index:2;opacity:.11;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E")}
+.robot-v16-shade{z-index:3;background:linear-gradient(90deg,rgba(2,4,8,.92) 0%,rgba(2,4,8,.62) 23%,transparent 65%),linear-gradient(0deg,rgba(1,3,7,.9),transparent 18%,transparent 80%,rgba(1,3,7,.4));opacity:calc(1 - var(--iris-open) * .6)}
+.robot-v16-intro-copy{position:absolute;z-index:4;left:max(5vw,24px);top:50%;transform:translateY(calc(-50% - var(--iris-open) * 35px));opacity:calc(1 - var(--iris-open) * 1.5);max-width:700px;pointer-events:none}
+.robot-v16-eyebrow{font-size:10px;letter-spacing:.3em;color:#90b4d9;display:flex;gap:12px;align-items:center}
+.robot-v16-eyebrow i{height:6px;width:6px;border-radius:50%;background:#72baff;box-shadow:0 0 17px #73c2ff}
+.robot-v16-intro-copy h1{font:500 clamp(62px,7vw,112px)/.97 'Space Grotesk',sans-serif;letter-spacing:-.086em;margin:42px 0 24px;color:#f4f6fc}
+.robot-v16-intro-copy h1 em,.robot-v16-reveal-copy h2 em{font-style:normal;color:#95bcd6}
+.robot-v16-intro-copy p{font-size:clamp(14px,1.3vw,18px);color:#b1bbc8;max-width:460px;line-height:1.8}
+.robot-v16-scroll{display:flex;gap:14px;align-items:center;margin-top:45px;font-size:10px;letter-spacing:.24em;color:#cbd6e6}
+.robot-v16-reveal-copy{z-index:5;position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:110px 22px 70px;opacity:var(--iris-reveal);transform:translateY(calc((1 - var(--iris-reveal)) * 40px));pointer-events:none}
+.robot-v16-reveal-copy span{font-size:10px;letter-spacing:.25em;color:#92bbdc}
+.robot-v16-reveal-copy h2{font:500 clamp(48px,7vw,108px)/.99 'Space Grotesk',sans-serif;letter-spacing:-.078em;margin:30px 0 20px}
+.robot-v16-reveal-copy p{color:#b2bdce;line-height:1.8;font-size:clamp(14px,1.5vw,18px);max-width:590px}
+.robot-v16-action{display:flex;align-items:center;gap:15px;margin-top:24px;font-size:11px;letter-spacing:.18em;border:1px solid #9ac4ec66;background:#0b1727;padding:16px 22px;pointer-events:auto}
+.robot-v16:not(.is-revealed) .robot-v16-action{pointer-events:none}
+.robot-v16-bottom{z-index:4;position:absolute;left:5vw;right:5vw;bottom:26px;display:flex;justify-content:space-between;gap:15px;font-size:9px;letter-spacing:.18em;color:#71869b;opacity:calc(1 - var(--iris-reveal) * .75)}
+.robot-v16-fallback{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(calc(1 + var(--iris-progress) * 1.5));width:min(75vmin,720px);aspect-ratio:1;border:22px solid #263c54;border-radius:50%;box-shadow:0 0 0 7px #5f829733,0 0 100px #347bcb44,inset 0 0 100px #070e16;background:radial-gradient(circle,#6fb4ee,#0c2747 14%,#040912 38%,#111c2e 62%,#05070c 90%)}
+.robot-v16-fallback-ring{position:absolute;inset:9%;border:2px dashed #78adca77;border-radius:50%;transform:rotate(calc(var(--iris-open) * 160deg))}
+.robot-v16-fallback-core{position:absolute;inset:31%;border:6px solid #79c0ef;border-radius:50%;box-shadow:0 0 35px #67bcff88}
+@media(max-width:900px){.robot-v16-shade{background:linear-gradient(0deg,rgba(2,4,8,.75),transparent 64%)}.robot-v16-intro-copy{top:auto;bottom:16%;transform:translateY(calc(var(--iris-open) * -25px))}.robot-v16-intro-copy h1{font-size:clamp(52px,12vw,84px)}.robot-v16-intro-copy p{max-width:360px}.robot-v16-scroll{margin-top:18px}.robot-v16-stage{inset:-4% -20% 12%}.robot-v16-bottom{font-size:8px}}
+@media(max-width:600px){.robot-v16{height:240svh}.robot-v16-intro-copy{bottom:18%;max-width:90vw}.robot-v16-intro-copy h1{font-size:clamp(46px,12vw,63px);margin:16px 0}.robot-v16-intro-copy p{font-size:13px}.robot-v16-stage{inset:0 -28% 10%}.robot-v16-reveal-copy h2{font-size:clamp(42px,11vw,60px)}.robot-v16-bottom span:last-child{display:none}}
+@media(prefers-reduced-motion:reduce){.robot-v16{height:auto}.robot-v16-sticky{position:relative;min-height:850px}.robot-v16-intro-copy{opacity:1;top:25%;bottom:auto;transform:none}.robot-v16-reveal-copy{position:relative;opacity:1;transform:none;padding-top:550px}.robot-v16-stage{opacity:.4}.robot-v16-shade{opacity:.6}}
+
+/* V16.1 — Canvas 3D responsivo; renderização sob demanda */
+.robot-v16-stage{display:block;overflow:hidden}
+.robot-eye-webgl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.robot-eye-webgl canvas{width:100%;height:100%;display:block;touch-action:pan-y}
+@media(max-width:900px){.robot-v16-stage{inset:0 -12% 3%}}
+@media(max-width:600px){.robot-v16-stage{inset:0 -20% 8%}}
+
+/* V17 / SEQUENCE LOCK: a pagina fica imovel enquanto o progresso anima a lente. */
+.robot-v16{height:100svh!important;min-height:100svh;position:relative;isolation:isolate}
+.robot-v16-sticky{position:relative!important;top:auto!important;height:100svh;min-height:100svh;overflow:hidden}
+.robot-v16-stage{transform:translateZ(0);contain:layout paint}
+.robot-v16-grid{opacity:.65}
+.robot-v16-intro-copy{left:max(6vw,24px);max-width:620px}
+.robot-v16-reveal-copy{background:radial-gradient(circle at center,rgba(2,7,15,.58),rgba(2,5,10,.91) 75%)}
+.robot-v17-reticle{position:absolute;z-index:4;inset:clamp(24px,5vw,65px);pointer-events:none;opacity:calc(.5 - var(--iris-reveal) * .4)}
+.robot-v17-reticle span{position:absolute;width:28px;height:28px;border:1px solid rgba(112,179,229,.35)}
+.robot-v17-reticle span:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}
+.robot-v17-reticle span:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}
+.robot-v17-reticle span:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}
+.robot-v17-reticle span:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+.robot-v17-diagnostic{position:absolute;right:max(5vw,20px);top:20%;z-index:4;display:flex;flex-direction:column;gap:15px;font:10px/1.5 ui-monospace,monospace;letter-spacing:.15em;color:#8eacc3;opacity:calc(.75 - var(--iris-reveal) * .75);pointer-events:none}
+.robot-v17-diagnostic span{display:flex;align-items:center;gap:8px}
+.robot-v17-diagnostic i{width:6px;height:6px;border-radius:50%;background:#9dfac5;box-shadow:0 0 8px #65ffa1}
+.robot-v17-diagnostic b{font-weight:400;color:#aaf4e0}
+.robot-v17-progress{position:absolute;z-index:4;right:5vw;bottom:85px;display:flex;flex-direction:column;gap:12px;width:min(220px,28vw);font:9px/1.3 ui-monospace,monospace;letter-spacing:.15em;color:#93abc9;pointer-events:none;opacity:calc(1 - var(--iris-reveal) * .95)}
+.robot-v17-progress div{height:2px;background:#5b759255}
+.robot-v17-progress i{display:block;width:100%;height:100%;background:#9bdbff;transform:scaleX(var(--iris-progress));transform-origin:left;box-shadow:0 0 10px #4cb4ff}
+@media(max-width:900px){.robot-v17-diagnostic{top:16%;right:20px;font-size:8px}.robot-v17-progress{display:none}}
+@media(max-width:600px){.robot-v17-diagnostic{display:none}.robot-v17-reticle{inset:22px}}
+@media(prefers-reduced-motion:reduce){.robot-v16{height:auto!important;min-height:100svh}.robot-v16-sticky{min-height:850px;height:auto}.robot-v17-diagnostic,.robot-v17-progress{display:none}}
+
+/* V18: scroll-driven scene, sem deslocamento nativo durante a abertura. */
+.robot-v16{height:100svh!important;min-height:100svh!important}
+.robot-v16-sticky{position:relative!important;inset:auto!important;min-height:100svh;height:100svh}
+.robot-v16-reveal-copy{background:radial-gradient(circle at 50% 50%,rgba(2,9,20,.55),rgba(2,5,11,.94) 83%)}
+.robot-v16-action{pointer-events:none}
+.robot-v16.is-revealed .robot-v16-action{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.robot-v16{height:auto!important}.robot-v16-sticky{height:auto!important;min-height:100svh}}

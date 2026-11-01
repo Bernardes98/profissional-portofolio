@@ -1,0 +1,72 @@
+/* V24 — Optical cinema. Deliberately one instrument panel, not overlapping HUDs. */
+.cinema-deck-eye .robot-v16-sticky{
+  background:radial-gradient(ellipse at 70% 48%,#11283b 0%,#060e19 45%,#02050a 78%)!important;
+}
+.cinema-deck-eye .robot-v16-stage{
+  inset:0 0 0 auto!important;
+  width:69%!important;
+  height:100%!important;
+  opacity:calc(1 - var(--iris-reveal)*.84)!important;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0%,black 16%,black 93%,transparent 100%);
+  mask-image:linear-gradient(90deg, transparent 0%,black 16%,black 93%,transparent 100%);
+}
+.cinema-deck-eye .robot-v16-intro-copy{
+  left:6.3vw!important;
+  top:51%!important;
+  bottom:auto!important;
+  max-width:min(36vw,580px)!important;
+  transform:translateY(-50%)!important;
+  z-index:9!important;
+}
+.cinema-deck-eye .robot-v16-intro-copy h1{
+  font-size:clamp(54px,5.65vw,94px)!important;
+  line-height:1.02!important;
+  letter-spacing:-.075em!important;
+  margin:26px 0 20px!important;
+  text-wrap:balance;
+}
+.cinema-deck-eye .robot-v16-intro-copy p{
+  font-size:clamp(14px,1.13vw,17px)!important;
+  max-width:400px;
+  color:#a5bac8;
+}
+.cinema-deck-eye .robot-v16-scroll{margin-top:30px!important}
+.cinema-deck-eye .robot-v16-shade{
+  background:linear-gradient(90deg,#02060c 0%,rgba(2,6,12,.98) 24%,rgba(2,6,12,.52) 38%,transparent 58%),linear-gradient(0deg,#02060b,transparent 14%,transparent 87%,#02060b)!important;
+  opacity:calc(1 - var(--iris-reveal)*.75)!important;
+  pointer-events:none;
+}
+.cinema-deck-eye .robot-v16-grid{opacity:.20!important}
+.cinema-deck-eye .holo-eye-target,
+.cinema-deck-eye .holo-eye-arc,
+.cinema-deck-eye .holo-eye-sidebar,
+.cinema-deck-eye .holo-eye-readout,
+.cinema-deck-eye .robot-v17-diagnostic{display:none!important}
+.cinema-deck-eye .robot-v17-reticle{opacity:.33!important;inset:38px!important}
+.cinema-deck-eye .robot-v17-progress{
+  bottom:100px!important;
+  right:4vw!important;
+  font-size:8px!important;
+  opacity:calc(.65 - var(--iris-reveal)*.6)!important;
+}
+.cinema-deck-eye .robot-v16-bottom{bottom:50px!important;opacity:.5!important;font-size:8px!important}
+/* Avoid extra chrome covering the headline. */
+.cinema-deck-eye .holo-diagnostics{display:none!important}
+.cinema-deck .holo-ambient-waves{opacity:.37!important}
+.cinema-deck .cinema-infinite-tunnel{opacity:.43}
+.cinema-deck-frame{border-color:rgba(126,218,247,.35)!important;box-shadow:0 20px 75px rgba(0,0,0,.45),0 0 38px rgba(37,147,219,.09)!important}
+.cinema-deck-copy h1{letter-spacing:-.065em}
+@media(max-width:1050px){
+  .cinema-deck-eye .robot-v16-stage{width:86%!important;right:-20%!important;opacity:.72!important}
+  .cinema-deck-eye .robot-v16-intro-copy{max-width:60vw!important;left:6vw!important}
+  .cinema-deck-eye .robot-v16-intro-copy h1{font-size:clamp(46px,8vw,80px)!important}
+}
+@media(max-width:640px){
+  .cinema-deck-eye .robot-v16-stage{width:145%!important;right:-58%!important;opacity:.55!important;mask-image:linear-gradient(90deg,transparent,black 26%,black 85%,transparent)!important}
+  .cinema-deck-eye .robot-v16-intro-copy{top:auto!important;bottom:18%!important;transform:none!important;max-width:88vw!important;left:7vw!important}
+  .cinema-deck-eye .robot-v16-intro-copy h1{font-size:clamp(45px,11vw,66px)!important}
+  .cinema-deck-eye .robot-v16-intro-copy p{max-width:310px}
+  .cinema-deck-eye .robot-v16-shade{background:linear-gradient(0deg,rgba(2,5,10,.96),rgba(2,5,10,.75) 30%,transparent 75%)!important}
+  .cinema-deck-eye .robot-v16-bottom,.cinema-deck-eye .robot-v17-progress{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.cinema-deck-eye .robot-v16-intro-copy{opacity:1!important}}

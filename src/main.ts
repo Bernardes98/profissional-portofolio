@@ -26,3 +26,5 @@ import './holographic-zoom-v23.css'
 import './cinematic-v24.css'
 
 import './gta-editorial-v29.css'
+
+import './cinema-v30.css'

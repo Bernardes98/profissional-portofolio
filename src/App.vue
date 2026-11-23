@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { Github, Linkedin, Menu, X, ArrowUpRight } from 'lucide-vue-next'
 import { gsap, prefersReduced } from './utils/motion'
@@ -12,14 +12,37 @@ const curtainKicker = ref('')
 const curtainTitle = ref('')
 
 function closeMenu() { menuOpen.value = false }
+
+/* ---------- Cursor de mira que segue o mouse (só em dispositivos com mouse) ---------- */
+const cursor = ref<HTMLElement | null>(null)
+let disposeCursor: (() => void) | undefined
+onMounted(() => {
+  const el = cursor.value
+  if (!el || prefersReduced() || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
+  const x = gsap.quickTo(el, 'x', { duration: 0.35, ease: 'power3' })
+  const y = gsap.quickTo(el, 'y', { duration: 0.35, ease: 'power3' })
+  const move = (e: PointerEvent) => {
+    x(e.clientX); y(e.clientY)
+    el.classList.add('is-on')
+    el.classList.toggle('is-hover', !!(e.target as Element | null)?.closest?.('a, button'))
+  }
+  const leave = () => el.classList.remove('is-on')
+  window.addEventListener('pointermove', move, { passive: true })
+  document.documentElement.addEventListener('pointerleave', leave)
+  disposeCursor = () => {
+    window.removeEventListener('pointermove', move)
+    document.documentElement.removeEventListener('pointerleave', leave)
+  }
+})
+onUnmounted(() => disposeCursor?.())
 watch(() => route.path, closeMenu)
 
 /* ---------- Transição entre páginas: cortina em faixas com o título da próxima cena ---------- */
 function describeDestination() {
   const project = projects.find(p => route.path === `/projetos/${p.slug}`)
-  if (project) return { kicker: `${project.number} / ESTUDO DE CASO`, title: project.name }
-  if (route.path === '/') return { kicker: 'FELIPE BERNARDES', title: 'Início' }
-  return { kicker: 'FELIPE BERNARDES', title: 'Fora do mapa' }
+  if (project) return { kicker: `CARREGANDO // PROJ_${project.number}`, title: project.name }
+  if (route.path === '/') return { kicker: 'CARREGANDO // BASE', title: 'Início' }
+  return { kicker: 'SINAL PERDIDO // 404', title: 'Fora do mapa' }
 }
 
 function onLeave(el: Element, done: () => void) {
@@ -78,6 +101,9 @@ function onEnter(el: Element, done: () => void) {
     <!-- Película: grão e vinheta sobre todo o site -->
     <div class="film-grain" aria-hidden="true"></div>
     <div class="film-vignette" aria-hidden="true"></div>
+
+    <!-- Cursor de mira -->
+    <div ref="cursor" class="cx-cursor" aria-hidden="true"><span class="cx-cursor-ring"></span></div>
 
     <!-- Cortina da transição entre páginas -->
     <div class="cx-curtain" aria-hidden="true">
